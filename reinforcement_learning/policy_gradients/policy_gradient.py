@@ -22,6 +22,13 @@ def policy_gradient(state, weight):
     """
     policy_probs = policy(state, weight)
     action = np.random.choice(len(policy_probs[0]), p=policy_probs[0])
-    gradient = state.T - np.sum(policy_probs * state.T, axis=1, keepdims=True)
+
+    s = policy_probs.reshape(-1, 1)
+
+    soft = (np.diagflat(s) - np.dot(s, s.T))[action, :]
+
+    log = soft / policy_probs[0, action]
+
+    gradient = state.T.dot(log[None, :])
 
     return action, gradient

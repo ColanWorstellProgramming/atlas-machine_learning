@@ -5,20 +5,21 @@ Imports
 import numpy as np
 
 
-def train(env, nb_episodes, alpha=0.000045, gamma=0.98, show_result=True):
+def train(env, nb_episodes, alpha=0.000045, gamma=0.98):
     """
-    Train With Animate
+    Train
     """
     state_size = env.observation_space.shape[0]
     action_size = env.action_space.n
     weight = np.zeros((state_size, action_size))
-
     all_scores = []
 
     for episode in range(nb_episodes):
         state = env.reset()[None, :]
         done = False
         score = 0
+        gradients = []
+        rewards = []
 
         while not done:
             state_matrix = np.reshape(state, [1, -1])
@@ -28,15 +29,22 @@ def train(env, nb_episodes, alpha=0.000045, gamma=0.98, show_result=True):
 
             weight += alpha * gamma**episode * reward * gradient
 
+            gradients.append(gradient)
+            rewards.append(reward)
+
             state = new_state
             score += reward
 
-        print(f"Episode: {episode + 1}, Score: {score}", end="\r", flush=False)
+        rewards = np.array(rewards)
+
+        for i in range(len(gradients)):
+            learning = (alpha * gradients[i])
+            discount = sum(gamma ** rewards[i:] * rewards[i:])
+            weight += learning * discount
+
+        print(f"Episode: {episode + 1}, Score: {score}")
 
         all_scores.append(score)
-
-        if show_result and (episode + 1) % 1000 == 0:
-            env.render(mode='human')
 
     return all_scores
 
@@ -58,6 +66,13 @@ def policy_gradient(state, weight):
     """
     policy_probs = policy(state, weight)
     action = np.random.choice(len(policy_probs[0]), p=policy_probs[0])
-    gradient = state.T - np.sum(policy_probs * state.T, axis=1, keepdims=True)
+
+    s = policy_probs.reshape(-1, 1)
+
+    soft = (np.diagflat(s) - np.dot(s, s.T))[action, :]
+
+    log = soft / policy_probs[0, action]
+
+    gradient = state.T.dot(log[None, :])
 
     return action, gradient
