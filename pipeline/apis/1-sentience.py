@@ -17,8 +17,10 @@ def sentientPlanets():
         data = response.json()
 
         for species in data['results']:
-            if ('classification' in species and species['classification'].lower() == 'sentient') or \
-               ('designation' in species and species['designation'].lower() == 'sentient'):
+            if ('classification' in species and \
+                species['classification'].lower() == 'sentient') or \
+               ('designation' in species and \
+                species['designation'].lower() == 'sentient'):
                 if 'homeworld' in species and species['homeworld']:
                     homeworld_url = species['homeworld']
                     homeworld_response = requests.get(homeworld_url)
