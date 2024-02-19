@@ -16,10 +16,12 @@ def availableShips(passenger_count):
         response = requests.get(url)
         data = response.json()
 
-        for ship in data['results']:
-            if ship['passengers'].isnumeric():
-                if int(ship['passengers']) >= passenger_count:
-                    ships.append(ship['name'])
+    for ship in data['results']:
+        if ship['passengers'].isnumeric() or ship['passengers'] == 'n/a':
+            if ship['passengers'].isnumeric() and int(ship['passengers']) >= passenger_count:
+                ships.append(ship['name'])
+            elif ship['passengers'] == 'n/a':
+                ships.append(ship['name'])
 
         url = data['next']
 
