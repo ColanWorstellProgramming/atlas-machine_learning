@@ -6,6 +6,9 @@ import requests
 
 
 if __name__ == '__main__':
+    """
+    Rocket Frequency
+    """
     response = requests.get("https://api.spacexdata.com/v3/launches")
     launches = response.json()
 

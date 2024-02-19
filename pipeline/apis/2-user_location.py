@@ -8,6 +8,9 @@ import time
 
 
 if __name__ == '__main__':
+    """
+    User Locations
+    """
     response = requests.get(sys.argv[1])
 
     if response.status_code == 404:
