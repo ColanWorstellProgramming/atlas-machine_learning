@@ -21,11 +21,11 @@ def sentientPlanets():
                 species['classification'].lower() == 'sentient') or \
                ('designation' in species and
                species['designation'].lower() == 'sentient'):
-                    if 'homeworld' in species and species['homeworld']:
-                        homeworld_url = species['homeworld']
-                        homeworld_response = requests.get(homeworld_url)
-                        homeworld_data = homeworld_response.json()
-                        planets.append(homeworld_data['name'])
+                if 'homeworld' in species and species['homeworld']:
+                    homeworld_url = species['homeworld']
+                    homeworld_response = requests.get(homeworld_url)
+                    homeworld_data = homeworld_response.json()
+                    planets.append(homeworld_data['name'])
 
         url = data['next']
 
