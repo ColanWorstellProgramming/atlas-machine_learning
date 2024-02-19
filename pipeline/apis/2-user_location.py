@@ -2,15 +2,16 @@
 """
 Imports
 """
-import sys
-import requests
-import time
 
 
 if __name__ == '__main__':
     """
     User Locations
     """
+    import sys
+    import requests
+    import time
+
     response = requests.get(sys.argv[1])
 
     if response.status_code == 404:
