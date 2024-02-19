@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+"""
+Imports
+"""
+import pandas as pd
+
+
+dictonary = {
+    'First': [0.0, 0.5, 1.0, 1.5],
+    'Second': ['one', 'two', 'three', 'four']
+}
+
+i = ['A', 'B', 'C', 'D']
+
+df = pd.DataFrame(dictonary, index=i)
+
+print(df)
