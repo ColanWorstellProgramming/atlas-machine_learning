@@ -16,6 +16,7 @@ if __name__ == '__main__':
     launches_sorted = sorted(launches, key=lambda x: x['date_unix'])
 
     first_launch = launches_sorted[0]
+
     launch_name = first_launch['name']
     launch_date_unix = first_launch['date_unix']
     launch_date_local = datetime.utcfromtimestamp(launch_date_unix).strftime('%Y-%m-%d %H:%M:%S')

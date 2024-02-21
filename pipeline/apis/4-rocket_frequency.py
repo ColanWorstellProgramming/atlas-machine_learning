@@ -13,6 +13,7 @@ if __name__ == '__main__':
     launches = response.json()
 
     rocket_launch_counts = {}
+
     for launch in launches:
         rocket_name = launch['rocket']['rocket_name']
         rocket_launch_counts[rocket_name] = rocket_launch_counts.get(rocket_name, 0) + 1
