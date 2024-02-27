@@ -1,2 +1,5 @@
 -- SQL
-CREATE DATABASE IF NOT EXISTS db_0;
+CREATE TABLE IF NOT EXISTS first_table (
+    id INT,
+    name VARCHAR(256)
+)
