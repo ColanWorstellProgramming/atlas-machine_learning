@@ -1,8 +1,8 @@
 -- SQL
 CREATE FUNCTION SafeDiv(a INT, b INT)
-RETURNS DECIMAL(10, 2)
+RETURNS FLOAT(10, 2)
 BEGIN
-    DECLARE result DECIMAL(10, 2);
+    DECLARE result FLOAT(10, 2);
 
     IF b = 0 THEN
         SET result = 0;
