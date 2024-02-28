@@ -1,9 +1,8 @@
 -- SQL
-DROP FUNCTION IF EXISTS SafeDiv;
 CREATE FUNCTION SafeDiv(a INT, b INT)
-RETURNS FLOAT(10, 2)
+RETURNS FLOAT
 BEGIN
-    DECLARE result FLOAT(10, 2);
+    DECLARE result FLOAT;
 
     IF b = 0 THEN
         SET result = 0;
