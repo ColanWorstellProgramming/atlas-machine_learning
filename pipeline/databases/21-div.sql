@@ -1,5 +1,5 @@
 -- SQL
-delimiter //
+DROP FUNCTION IF EXISTS SafeDiv;
 CREATE FUNCTION SafeDiv(a INT, b INT)
 RETURNS FLOAT(10, 2)
 BEGIN
@@ -12,6 +12,4 @@ BEGIN
     END IF;
 
     RETURN result;
-END;//
-
-delimiter ;
+END;
