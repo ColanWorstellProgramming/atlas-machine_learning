@@ -25,3 +25,6 @@ def get_logs_stats():
 
     status_logs_count = collection.count_documents({"method": "GET", "path": "/status"})
     print(f"{status_logs_count} logs with method=GET\npath=/status")
+
+if __name__ == "__main__":
+    get_logs_stats()
